@@ -1,16 +1,69 @@
-import { insertHtml } from './html.js';
+import insertHtml from './dom.js';
+
 insertHtml();
-const body = document.querySelector('body');
+const textArea = document.querySelector('.text');
 const keys = document.querySelectorAll('.key');
-const spaceKey = document.querySelector('.space_key');
-const shiftLeft = document.querySelector('.shift_left');
-const shiftRight = document.querySelector('.shift_right');
-const capsLock = document.querySelector('.caps_lock_key');
-const shiftKey = document.querySelectorAll('.shift_key');
 const caseDown = document.querySelectorAll('.caseDown');
 const caseUp = document.querySelectorAll('.caseUp');
 const rus = document.querySelectorAll('.rus');
 const eng = document.querySelectorAll('.eng');
+
+// CapsLock
+
+function CapsLock() {
+  caseDown.forEach((element) => {
+    element.classList.toggle('hidden');
+  });
+  caseUp.forEach((element) => {
+    element.classList.toggle('hidden');
+  });
+}
+
+// Ввод текста кликом мыши
+// TODO удаляется послений символ, а нужно удалять поред курсором
+
+keys.forEach((key) => {
+  key.addEventListener('click', () => {
+    if (key.innerText === 'CapsLock') {
+      CapsLock();
+    } else if (key.innerText === '') {
+      textArea.value += ' ';
+    } else {
+      textArea.value += key.innerText;
+      textArea.focus();
+    }
+  });
+});
+
+// Backspace
+
+// else if (key.innerText === 'Backspace') {
+//   textArea.value = textArea.value.slice(0, -1);
+//   textArea.focus();
+//   return;
+// }
+
+// Анимация нажатия клавиш
+
+document.addEventListener('keydown', (event) => {
+  keys.forEach((key) => {
+    textArea.focus();
+    if (key.classList.contains(event.code)) {
+      if (event.key === 'Tab' || event.key === 'Meta' || event.key === 'Alt') {
+        event.preventDefault();
+      }
+      key.classList.add('active');
+    }
+  });
+});
+
+document.addEventListener('keyup', (event) => {
+  keys.forEach((key) => {
+    if (key.classList.contains(event.code)) {
+      key.classList.remove('active');
+    }
+  });
+});
 
 // Переключение языка
 
