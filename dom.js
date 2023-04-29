@@ -667,6 +667,10 @@ export default function insertHtml() {
     </div>
     <p>Клавиатура создана в операционной системе Windows</p>
     <p>Для переключения языка комбинация: левые ctrl + alt</p>
+    <label class="switch">Скрыть клавиатуру
+      <input type="checkbox" class="checkbox">
+      <div class="slider"></div>
+    </label>
   </div>
 `;
   body.insertAdjacentHTML('afterbegin', html);
