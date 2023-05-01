@@ -655,7 +655,10 @@ export default function insertHtml() {
       </div>
       <div class="keyboard__row">
         <div class="key ctrl_key ctrl_left ControlLeft">Ctrl</div>
-        <div class="key win_key MetaLeft">en</div>
+        <div class="key win_key MetaLeft">
+          <span class="rus hidden">ru</span>
+          <span class="eng">en</span>
+        </div>
         <div class="key alt_key alt_left AltLeft">Alt</div>
         <div class="key space_key Space"></div>
         <div class="key alt_key alt_right AltRight">Alt</div>
