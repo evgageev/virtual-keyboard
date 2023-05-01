@@ -121,10 +121,13 @@ keys.forEach((key) => {
       }
       textArea.value += '\n';
     } else if (key.innerText === 'en' || key.innerText === 'ru') {
+      playKey();
       return 1;
     } else if (key.innerText === '←' || key.innerText === '→') {
+      playKey();
       arrowsHandler(key.innerText);
     } else if (key.innerText === '') {
+      playKey();
       textArea.value += ' ';
     } else if (
       key.innerText === 'Tab' ||
