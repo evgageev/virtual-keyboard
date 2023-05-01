@@ -1,18 +1,40 @@
 import insertHtml from './dom.js';
 
 insertHtml();
+const keyboard = document.querySelector('.keyboard');
+if ('htmlKeyboard' in localStorage) {
+  keyboard.innerHTML = localStorage.getItem('htmlKeyboard');
+}
 const textArea = document.querySelector('.text');
 const keys = document.querySelectorAll('.key');
 const caseDown = document.querySelectorAll('.caseDown');
 const caseUp = document.querySelectorAll('.caseUp');
+const mute = document.querySelector('.AltRight');
 const caps = document.querySelectorAll('.caps');
 const shiftCaps = document.querySelectorAll('.shiftCaps');
 const rus = document.querySelectorAll('.rus');
 const eng = document.querySelectorAll('.eng');
 const slider = document.querySelector('.slider');
-const keyboard = document.querySelector('.keyboard');
 const capsLockKey = document.querySelector('.caps_lock_key');
 const languageBtn = document.querySelector('.win_key');
+const ruKeySound = new Audio('https://www.fesliyanstudios.com/play-mp3/649');
+const enKeySound = new Audio('https://www.fesliyanstudios.com/play-mp3/648');
+const shiftKeySound = new Audio('https://www.fesliyanstudios.com/play-mp3/647');
+const capsLockKeySound = new Audio(
+  'https://www.fesliyanstudios.com/play-mp3/646'
+);
+const backspaceKeySound = new Audio(
+  'https://www.fesliyanstudios.com/play-mp3/645'
+);
+const enterKeySound = new Audio('https://www.fesliyanstudios.com/play-mp3/644');
+
+const playKey = () => {
+  if (!eng[0].classList.contains('hidden')) {
+    enKeySound.play();
+  } else {
+    ruKeySound.play();
+  }
+};
 
 // Slider
 
@@ -20,16 +42,23 @@ slider.addEventListener('click', () => {
   keyboard.classList.toggle('keyboard_hidden');
 });
 
+// Mute
+
+mute.addEventListener('click', () => {
+  mute.classList.toggle('mute');
+  mute.classList.toggle('active');
+});
+
 // CapsLock
 
-function capsLock() {
+const capsLock = () => {
   caseDown.forEach((element) => {
     element.classList.toggle('hidden');
   });
   caps.forEach((element) => {
     element.classList.toggle('hidden');
   });
-}
+};
 
 // Backspace
 const backspace = () => {
@@ -70,12 +99,27 @@ const arrowsHandler = (arrow) => {
 
 keys.forEach((key) => {
   key.addEventListener('click', () => {
-    if (key.innerText === 'CapsLock' || key.innerText === 'Shift') {
+    if (key.innerText === 'CapsLock') {
+      if (!mute.classList.contains('mute')) {
+        capsLockKeySound.play();
+      }
+      key.classList.toggle('active');
+      capsLock();
+    } else if (key.innerText === 'Shift') {
+      if (!mute.classList.contains('mute')) {
+        shiftKeySound.play();
+      }
       key.classList.toggle('active');
       capsLock();
     } else if (key.innerText === 'Backspace') {
+      if (!mute.classList.contains('mute')) {
+        backspaceKeySound.play();
+      }
       backspace();
     } else if (key.innerText === 'Enter') {
+      if (!mute.classList.contains('mute')) {
+        enterKeySound.play();
+      }
       textArea.value += '\n';
     } else if (key.innerText === 'en' || key.innerText === 'ru') {
       return 1;
@@ -87,10 +131,16 @@ keys.forEach((key) => {
       key.innerText === 'Tab' ||
       key.innerText === 'Ctrl' ||
       key.innerText === 'Alt' ||
-      key.innerText === 'Del'
+      key.innerText === 'Del' ||
+      key.innerText === 'Mute'
     ) {
-      return 1;
+      if (!mute.classList.contains('mute')) {
+        playKey();
+      }
     } else {
+      if (!mute.classList.contains('mute')) {
+        playKey();
+      }
       insertText(key.innerText);
     }
     textArea.focus();
@@ -222,4 +272,9 @@ document.addEventListener('keyup', (event) => {
       });
     }
   }
+});
+
+window.addEventListener('beforeunload', () => {
+  const htmlKeyboard = keyboard.innerHTML;
+  localStorage.setItem('htmlKeyboard', htmlKeyboard);
 });

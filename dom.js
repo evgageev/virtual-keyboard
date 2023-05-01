@@ -661,7 +661,7 @@ export default function insertHtml() {
         </div>
         <div class="key alt_key alt_left AltLeft">Alt</div>
         <div class="key space_key Space"></div>
-        <div class="key alt_key alt_right AltRight">Alt</div>
+        <div class="key alt_key alt_right AltRight">Mute</div>
         <div class="key ArrowLeft">&larr;</div>
         <div class="key ArrowDown">&darr;</div>
         <div class="key ArrowRight">&rarr;</div>
