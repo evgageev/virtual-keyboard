@@ -8,7 +8,6 @@ if ('htmlKeyboard' in localStorage) {
 const textArea = document.querySelector('.text');
 const keys = document.querySelectorAll('.key');
 const caseDown = document.querySelectorAll('.caseDown');
-const caseUp = document.querySelectorAll('.caseUp');
 const mute = document.querySelector('.AltRight');
 const caps = document.querySelectorAll('.caps');
 const shiftCaps = document.querySelectorAll('.shiftCaps');
@@ -215,6 +214,12 @@ document.addEventListener('keydown', (event) => {
     shiftCaps.forEach((element) => {
       element.classList.remove('hidden');
     });
+  } else if (
+    !shiftCaps[0].classList.contains('hidden') &&
+    event.shiftKey &&
+    event.repeat === false
+  ) {
+    console.log(2);
   } else if (event.shiftKey && event.repeat === false) {
     console.log(event.repeat);
     if (rus[0].classList.contains('hidden')) {
