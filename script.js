@@ -224,7 +224,6 @@ document.addEventListener('keydown', (event) => {
   ) {
     console.log(2);
   } else if (event.shiftKey && event.repeat === false) {
-    console.log(event.repeat);
     if (rus[0].classList.contains('hidden')) {
       eng.forEach((element) => {
         if (element.childNodes[0].nodeType === 3) {
