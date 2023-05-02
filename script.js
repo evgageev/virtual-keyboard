@@ -222,7 +222,7 @@ document.addEventListener('keydown', (event) => {
     event.shiftKey &&
     event.repeat === false
   ) {
-    console.log(2);
+    console.log('Hello');
   } else if (event.shiftKey && event.repeat === false) {
     if (rus[0].classList.contains('hidden')) {
       eng.forEach((element) => {
