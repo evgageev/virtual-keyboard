@@ -285,3 +285,13 @@ window.addEventListener('beforeunload', () => {
   const htmlKeyboard = keyboard.innerHTML;
   localStorage.setItem('htmlKeyboard', htmlKeyboard);
 });
+
+const id = 1;
+if (
+  (id >= 1 && id <= 12) ||
+  (id >= 16 && id <= 27) ||
+  (id >= 31 && id <= 41) ||
+  (id >= 45 && id <= 54)
+) {
+  console.log('hello');
+}
